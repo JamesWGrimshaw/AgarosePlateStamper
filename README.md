@@ -1,2 +1,4 @@
 # AgarosePlateStamper
-This project is to generate a tool for immobilising bacterial cells at the bottom of plates for high content microscopy which consists of a plate stamp, a centering frame, an agarose mould and a cutter. To make it viable, it has to be able to transfer an agarose pad, loaded with bacteria, to the bottom of a 96 well plate.
+This set of tools allow for immobilisation of bacterial cells at the bottom of plates for high content microscopy. These consist of a plate stamp, a centering frame, an agarose mould and a cutter.
+
+![Stamp]([files](https://github.com/JamesWGrimshaw/AgarosePlateStamper/blob/main/Images/StampOnly.PNG))
