@@ -1,3 +1,4 @@
+[![Documentation Status](https://readthedocs.org/projects/agaroseplatestamper/badge/?version=latest)](https://agaroseplatestamper.readthedocs.io/en/latest/?badge=latest)
 # AgarosePlateStamper
 This set of tools allow for immobilisation of bacterial cells at the bottom of plates for high content microscopy. These consist of a plate stamp, a centering frame, an agarose mould and a cutter.
 
