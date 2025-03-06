@@ -1,0 +1,18 @@
+[project]
+name = "AgarosePlateStamper"
+version = "0.0.1"
+authors = [
+  { name="James Grimshaw", email="jameswgrimshaw@gmail.com" },
+]
+description = "A set of tools allow for immobilisation of bacterial cells at the bottom of plates for high content microscopy."
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+    "License :: OSI Approved :: GPL-3.0-or-later",
+]
+
+[project.urls]
+Homepage = "https://github.com/JamesWGrimshaw/AgarosePlateStamper"
+Issues = "https://github.com/JamesWGrimshaw/AgarosePlateStamper/issues"
