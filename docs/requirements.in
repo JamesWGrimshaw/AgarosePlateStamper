@@ -1,2 +1,7 @@
 Sphinx>=6,<8
 sphinx_rtd_theme
+solidpython
+viewscad
+PySide6
+drawsvg
+sphinx_automodapi
