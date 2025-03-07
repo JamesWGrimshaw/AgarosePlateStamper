@@ -62,3 +62,4 @@ solidpython
 viewscad
 PySide6
 drawsvg
+sphinx_automodapi
