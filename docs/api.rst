@@ -3,5 +3,5 @@ API
 .. autosummary::
 	:toctree:  generated
 
-	platestamper.generator
-	platestamper.gui_utils
+	agaroseplatestamper.generator
+	agaroseplatestamper.gui_utils
