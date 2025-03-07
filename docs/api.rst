@@ -1,6 +1,6 @@
 API
 ===
-..autosummary::
+.. autosummary::
 	:toctree:  generated
 
 	platestamper.generator
