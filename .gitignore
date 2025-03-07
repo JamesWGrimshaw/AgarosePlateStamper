@@ -2,3 +2,4 @@ __pycache__/
 dist/
 src/agaroseplatestamper.egg-info/
 build/
+build/lib/platestamper/__init__.py
