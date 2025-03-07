@@ -19,6 +19,11 @@ dependencies = [
 	"drawsvg"
 ]
 
+paths.source = [
+    "platestamper"
+]
+
 [project.urls]
 Homepage = "https://github.com/JamesWGrimshaw/AgarosePlateStamper"
 Issues = "https://github.com/JamesWGrimshaw/AgarosePlateStamper/issues"
+Documentation = "https://agaroseplatestamper.readthedocs.io/en/latest/index.html"
