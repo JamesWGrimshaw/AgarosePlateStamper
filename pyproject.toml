@@ -19,9 +19,8 @@ dependencies = [
 	"drawsvg"
 ]
 
-paths.source = [
-    "platestamper"
-]
+[tool.setuptools]
+packages = ["platestamper"]
 
 [project.urls]
 Homepage = "https://github.com/JamesWGrimshaw/AgarosePlateStamper"
