@@ -130,7 +130,7 @@ class Plate:
 		
 	# Mesh generation functions
 	def generate_plate(self):
-		"Generates an example plate"
+		"""Generates an example plate"""
 		Plate = solid.cube([self.PlateLength, self.PlateWidth, self.PlateHeight])
 		Well = solid.cylinder(d=self.WellDiameter, h=self.WellDepth, segments=self.CylinderSegments)
 		# Rotates the well by 45 degrees in case it is a square to ensure it is in the correct orientation
@@ -144,7 +144,7 @@ class Plate:
 		self.Plate = Plate
 	
 	def generate_stamp(self):
-		"Generates a plate Stamp with columns matching the wells of the plate"
+		"""Generates a plate Stamp with columns matching the wells of the plate"""
 		Base = solid.cube([self.PlateLength + (self.BrimExtension * 2), 
 					 	   self.PlateWidth + (self.BrimExtension * 2), 
 						   self.StampBaseHeight])
@@ -166,7 +166,7 @@ class Plate:
 		self.PlateStamp = Base
 
 	def generate_mould(self):
-		"Generates a mould that sits on the frame. This will be used to create the agarose mould"
+		"""Generates a mould that sits on the frame. This will be used to create the agarose mould"""
 		# Generates the initial mould and frame cuboids
 		Mould = solid.cube([self.PlateLength, self.PlateWidth, self.MouldThickness])
 		# Creates the wells for the mould
