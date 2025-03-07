@@ -90,7 +90,7 @@ ipykernel==6.29.5
     #   jupyter
     #   jupyter-console
     #   jupyterlab
-ipython==9.0.1
+ipython
     # via
     #   ipykernel
     #   ipywidgets
