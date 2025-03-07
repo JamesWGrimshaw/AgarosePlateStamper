@@ -1,2 +1,0 @@
-from AgarosePlateStamper import ToolGeneration
-from AgarosePlateStamper import gui_utils
