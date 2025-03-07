@@ -6,4 +6,4 @@ API
 	platestamper.generator
 	platestamper.gui_utils
 
-	platestamper.generator.Plate
+.. automodule:: platestamper.generator
