@@ -1,8 +1,5 @@
 API
 ===
 
-.. autosummary::
-   :toctree: generated
-
-   generator
-   gui_utils
+.. automodapi:: agaroseplatestamper.generator
+.. automodapi:: agaroseplatestamper.gui_utils
