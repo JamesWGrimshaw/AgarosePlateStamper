@@ -4,4 +4,5 @@ API
 .. autosummary::
    :toctree: generated
 
-   platestamper
+   generator
+   gui_utils
