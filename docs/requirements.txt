@@ -4,7 +4,7 @@
 #
 #    pip-compile requirements.in
 #
-alabaster==1.0.0
+alabaster==0.7.16
     # via sphinx
 babel==2.17.0
     # via sphinx
@@ -32,11 +32,9 @@ pygments==2.19.1
     # via sphinx
 requests==2.32.3
     # via sphinx
-roman-numerals-py==3.1.0
-    # via sphinx
 snowballstemmer==2.2.0
     # via sphinx
-sphinx==8.2.3
+sphinx==7.4.7
     # via
     #   -r requirements.in
     #   sphinx-rtd-theme
