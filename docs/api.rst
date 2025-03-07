@@ -1,5 +1,5 @@
 API
 ===
 
-.. automodapi:: agaroseplatestamper.generator
-.. automodapi:: agaroseplatestamper.gui_utils
+.. automodapi:: platestamper.generator
+.. automodapi:: platestamper.gui_utils
