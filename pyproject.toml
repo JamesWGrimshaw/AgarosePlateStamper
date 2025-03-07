@@ -1,5 +1,5 @@
 [project]
-name = "AgarosePlateStamper"
+name = "agaroseplatestamper"
 version = "0.0.1"
 authors = [
   { name="James Grimshaw", email="jameswgrimshaw@gmail.com" },
@@ -11,6 +11,12 @@ classifiers = [
     "Programming Language :: Python :: 3",
     "Operating System :: OS Independent",
     "License :: OSI Approved :: GPL-3.0-or-later",
+]
+dependencies = [
+	"solidpython",
+	"viewscad",
+	"PySide6",
+	"drawsvg"
 ]
 
 [project.urls]

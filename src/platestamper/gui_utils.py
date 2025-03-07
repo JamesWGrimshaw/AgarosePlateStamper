@@ -1,7 +1,7 @@
 import drawsvg as dw
 import PySide6
 import math
-import AgarosePlateInsert
+import AgarosePlateStamper
 
 def getAngleBetweenPoints(x1, y1, x2, y2):
 	Angle = math.atan2(y2 - y1, x2 - x1)
