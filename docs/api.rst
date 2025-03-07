@@ -1,5 +1,7 @@
 API
 ===
-.. automodapi:: platestamper
-.. automodapi:: platestamper.generator
-.. automodapi:: platestamper.gui_utils
+..autosummary::
+	:toctree:  generated
+
+	platestamper.generator
+	platestamper.gui_utils
