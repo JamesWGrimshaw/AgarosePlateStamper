@@ -21,13 +21,13 @@ To initialise your plate, you will need to create a new instance of the :class:`
 basic dimensions of the plate which can be found in technical drawings provided by the manufactuer. 
 For example here are the technical drawings for the ibidi µ-Plate 96 Well Round:
 
-.. image:: ../Images/Ibidi_TopDown.PNG
+.. image:: Ibidi_TopDown.PNG
 	   :alt: Ibidi µ-Plate 96 Well Round Technical Drawing (Top Down)
    :align: left
 
-.. image:: ../Images/Ibidi_SideOn.PNG
+.. image:: Ibidi_SideOn.PNG
 	   :alt: Ibidi µ-Plate 96 Well Round Technical Drawing (Side On)
-   :align: right
+   :align: left
 
 From the top down view we can see that the plate is 127.8 mm length and 85.5 mm width, has a well diameter 
 of 6.2 mm and a well spacing of 9 mm. We can also get the X and Y offsets of the wells from the edges of 
