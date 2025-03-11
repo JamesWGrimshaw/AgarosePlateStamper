@@ -36,9 +36,62 @@ def export(mesh, openscadpath, filepath, stl=True, scad=False):
 		if scad == False:
 			os.remove(filepath + ".scad")
 
-class Plate:
-	def __init__(self, 
-			  PlateHeight, 
+class model_3d:
+	def __init__(self,
+			  OpenSCADObject,
+			  OpenSCADPath=None):
+		"""This class is used to render and export OpenSCAD objects
+
+		Args:
+			OpenSCADObject (solidpython.OpenSCADObject): Mesh to be rendered/exported
+			OpenSCADPath (str, optional):  Path to OpenSCAD executable (used for exporting and rendering). Defaults to None.
+		"""
+		self.OpenSCADObject = OpenSCADObject
+		self.OpenSCADPath = OpenSCADPath
+	
+	def render(self, Renderer=None):
+		"""Renders the OpenSCAD object in jupyter notebook
+
+		Args:
+			Renderer (viewscad.Renderer, optional): Existing renderer object. 
+			If none is provided a new one will be generated. Defaults to None.
+
+		Raises:
+			AttributeError: If no renderer is provided and OpenSCADPath is not set will raise an AttributeError
+		"""
+		if Renderer is None:
+			if self.OpenSCADPath is None:
+				raise AttributeError("OpenSCADPath is not set/Renderer is not provided")
+			Renderer = viewscad.Renderer(openscad_exec=self.OpenSCADPath, grid_lines_width=5, draw_grids=True)
+		Renderer.render(self.OpenSCADObject)
+
+	def export_object(self, filepath, stl=True, scad=False, OpenSCADPath=None):
+		"""Exports the OpenSCAD object to an stl or scad file
+
+		Args:
+			filepath (str): Path to save the file
+			stl (bool, optional): Whether to save the stl file. Defaults to False.
+			scad (bool, optional): Whether to save the scad file. Defaults to False.
+			OpenSCADPath (str, optional): Path to OpenSCAD executable (used for exporting and rendering). Defaults to None.
+
+		Raises:
+			AttributeError: If no OpenSCAD Path is provided and not in the class will raise an AttributeError
+
+			AttributeError: If no file type is selected will raise an AttributeError
+		"""
+		if stl == False and scad == False:
+			raise AttributeError("No file type selected")
+
+		if OpenSCADPath is None:
+			if self.OpenSCADPath is None:
+				raise AttributeError("OpenSCADPath is not set")
+			OpenSCADPath = self.OpenSCADPath
+		export(self.OpenSCADObject, OpenSCADPath, filepath, stl=stl, scad=scad)
+
+class multiwell_plate:
+	def __init__(self,
+			  PlateLength,
+			  PlateWidth, 
 			  WellDiameter, 
 			  WellToWellDistance, 
 			  WellDepth, 
@@ -47,8 +100,7 @@ class Plate:
 			  Rows, 
 			  Columns,
 			  WellZOffset=0.29,
-			  PlateLength=127.76, 
-			  PlateWidth=85.48,  
+			  PlateHeight=13.4,
 			  OpenSCADPath=None, 
 			  StampBaseHeight=5.0,
 			  BrimExtension=0.0,
@@ -61,7 +113,8 @@ class Plate:
 		"""This class is used to create tools used to make agarose pads for a multiwell plate of the specified dimensions.
 
 		Args:
-			PlateHeight (float): Height of the plate
+			PlateLength (float): Length of the plate.
+			PlateWidth (float): Width of the plate.
 			WellDiameter (float): Diameter of the wells
 			WellToWellDistance (float): Spacing between the wells
 			WellDepth (float): Depth of the wells
@@ -69,10 +122,9 @@ class Plate:
 			WellYOffset (float): Offset of the centre of the first well away from the long edge of the plate
 			Rows (int): Number of rows of wells
 			Columns (int): Number of columns of wells
-			WellZOffset (float, optional): Offset of the bottom of the wells away from the bottom of the plate. Only needed for example plate generation Defaults to 0.29.
-			PlateLength (float, optional): Length of the plate. Defaults to 127.76.
-			PlateWidth (float, optional): Width of the plate. Defaults to 85.48.
-			OpenSCADPath (str, optional):  Path to OpenSCAD executable (used for exporting and rendering).. Defaults to None.
+			PlateHeight (float, optional): Height of the plate. Only needed for example plate generation. Defaults to 13.4.
+			WellZOffset (float, optional): Offset of the bottom of the wells away from the bottom of the plate. Only needed for example plate generation. Defaults to 0.29.
+			OpenSCADPath (str, optional):  Path to OpenSCAD executable (used for exporting and rendering). Defaults to None.
 			StampBaseHeight (float, optional): Height of the base of the plate Stamp. Defaults to 5.0.
 			BrimExtension (float, optional): Amount to extend the brim that the frame sits on by. Defaults to 0.0.
 			StampDepthExtension (float, optional): Amount to extend the Stamp pillars past the thickness of the mould. Defaults to 1.
@@ -106,11 +158,9 @@ class Plate:
 		self.BrimExtension = BrimExtension
 		self.CuboidWellSize = CuboidWellSize
 		self.OpenSCADPath = OpenSCADPath
-		self.Plate = None
-		self.PlateStamp = None
-		self.PlateMould = None
-		self.Frame = None
-		self.Cutter = None
+		self.generate_plate()
+		self.generate_stamp()
+		self.generate_mould()
 
 		if self.CuboidWellSize:
 			self.CylinderSegments = 4
@@ -141,7 +191,7 @@ class Plate:
 		for row in range(self.Rows):
 			for column in range(self.Columns):
 				Plate -= sutils.translate([self.WellToWellDistance*column, self.WellToWellDistance*row, 0])(Well)
-		self.Plate = Plate
+		self.Plate = model_3d(Plate, OpenSCADPath=self.OpenSCADPath)
 	
 	def generate_stamp(self):
 		"""Generates a plate Stamp with columns matching the wells of the plate"""
@@ -163,7 +213,7 @@ class Plate:
 		for row in range(self.Rows):
 			for column in range(self.Columns):
 				Base += sutils.translate([self.WellToWellDistance*column, self.WellToWellDistance*row, 0])(WellStamp)
-		self.PlateStamp = Base
+		self.PlateStamp = model_3d(Base, OpenSCADPath=self.OpenSCADPath)
 
 	def generate_mould(self):
 		"""Generates a mould that sits on the frame. This will be used to create the agarose mould"""
@@ -186,76 +236,4 @@ class Plate:
 		for row in range(self.Rows):
 			for column in range(self.Columns):
 				Mould -= sutils.translate([self.WellToWellDistance*column, self.WellToWellDistance*row, 0])(WellMould)
-		self.PlateMould = Mould
-
-	# Get mesh functions
-	def getPlate(self):
-		if self.Plate is None:
-			self.generate_plate()
-		return self.Plate
-	
-	def getStamp(self):
-		if self.PlateStamp is None:
-			self.generate_stamp()
-		return self.PlateStamp
-
-	def getMould(self):
-		if self.PlateMould is None:
-			self.generate_mould()
-		return self.PlateMould
-
-	# Render functions
-	def render_plate(self, Renderer=None):
-		if self.Plate is None:
-			self.generate_plate()
-		if Renderer is None:
-			if self.OpenSCADPath is None:
-				raise AttributeError("OpenSCADPath is not set/Renderer is not provided")
-			Renderer = viewscad.Renderer(openscad_exec=self.OpenSCADPath, grid_lines_width=5, draw_grids=True)
-		Renderer.render(self.Plate)
-
-	def render_stamp(self, Renderer=None):
-		if self.PlateStamp is None:
-			self.generate_stamp()
-		if Renderer is None:
-			if self.OpenSCADPath is None:
-				raise AttributeError("OpenSCADPath is not set/Renderer is not provided")
-			Renderer = viewscad.Renderer(openscad_exec=self.OpenSCADPath, grid_lines_width=5, draw_grids=True)
-		Renderer.render(self.PlateStamp)
-	
-	def render_mould(self, Renderer=None):
-		if self.PlateMould is None:
-			self.generate_mould()
-		if Renderer is None:
-			if self.OpenSCADPath is None:
-				raise AttributeError("OpenSCADPath is not set/Renderer is not provided")
-			Renderer = viewscad.Renderer(openscad_exec=self.OpenSCADPath, grid_lines_width=5, draw_grids=True)
-		Renderer.render(self.PlateMould)
-
-	# Export functions
-	def export_plate(self, filepath, stl=False, OpenSCADPath=None):
-		if OpenSCADPath is None:
-			if self.OpenSCADPath is None:
-				raise AttributeError("OpenSCADPath is not set")
-			OpenSCADPath = self.OpenSCADPath
-		if self.Plate is None:
-			self.generate_plate()
-		export(self.Plate, self.OpenSCADPath, filepath, stl)
-
-	def export_stamp(self, filepath, stl=False, OpenSCADPath=None):
-		if OpenSCADPath is None:
-			if self.OpenSCADPath is None:
-				raise AttributeError("OpenSCADPath is not set")
-			OpenSCADPath = self.OpenSCADPath
-		if self.PlateStamp is None:
-			self.generate_stamp()
-		export(self.PlateStamp, self.OpenSCADPath, filepath, stl)
-
-	def export_mould(self, filepath, stl=False, OpenSCADPath=None):
-		if OpenSCADPath is None:
-			if self.OpenSCADPath is None:
-				raise AttributeError("OpenSCADPath is not set")
-			OpenSCADPath = self.OpenSCADPath
-		if self.PlateMould is None:
-			self.generate_mould()
-		export(self.PlateMould, self.OpenSCADPath, filepath, stl)
+		self.PlateMould = model_3d(Mould, OpenSCADPath=self.OpenSCADPath)
