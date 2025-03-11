@@ -21,13 +21,7 @@ To initialise your plate, you will need to create a new instance of the :class:`
 basic dimensions of the plate which can be found in technical drawings provided by the manufactuer. 
 For example here are the technical drawings for the ibidi µ-Plate 96 Well Round:
 
-.. image:: Ibidi_TopDown.PNG
-	   :alt: Ibidi µ-Plate 96 Well Round Technical Drawing (Top Down)
-   :align: left
-
-.. image:: Ibidi_SideOn.PNG
-	   :alt: Ibidi µ-Plate 96 Well Round Technical Drawing (Side On)
-   :align: left
+|TopDown| |SideOn|
 
 From the top down view we can see that the plate is 127.8 mm length and 85.5 mm width, has a well diameter 
 of 6.2 mm and a well spacing of 9 mm. We can also get the X and Y offsets of the wells from the edges of 
@@ -75,7 +69,7 @@ If we have both of these set we can initialise our plate as follows:
 						   CylinderSegments=256 # Number of segments to use for the well geometry
 						  )
 
-There are many additional parameters that can be set allowing you to tune the print to your specific needs. For a full list of parameters please see the `multiwell_plate` class documentation.
+There are many additional parameters that can be set allowing you to tune the print to your specific needs. For a full list of parameters please see the :class:`multiwell_plate` class documentation.
 
 .. _Exporting your models:
 Exporting your models
@@ -99,3 +93,10 @@ You may also want to quickly visualise the models while prototyping, this can be
 .. code-block:: python
 
    plate.PlateStamp.render()
+
+
+.. |TopDown| image:: Ibidi_TopDown.PNG
+	:alt: Ibidi µ-Plate 96 Well Round Technical Drawing (Top Down)
+
+.. |SideOn| image:: Ibidi_SideOn.PNG
+	:alt: Ibidi µ-Plate 96 Well Round Technical Drawing (Side On)
