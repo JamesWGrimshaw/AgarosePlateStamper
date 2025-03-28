@@ -19,7 +19,7 @@ sys.path.insert(0, os.path.abspath('../'))
 # -- Project information -----------------------------------------------------
 
 project = "Agarose Plate Stamper"
-copyright = "2025, James Grimshaw"
+copyright = "2025 by James Grimshaw is licensed under CC BY 4.0"
 author = "James Grimshaw"
 
 
