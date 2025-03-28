@@ -1,7 +1,7 @@
 .. include:: ../README.rst
 
-Welcome to The Agarose Plate Stamper documentation!
-===================================
+Agarose Plate Stamper
+=====================
 
 **agaroseplatestamper** is a Python library which can generate tools
 to allow for immobolisation of bacteria in multi-well plates for microscopy.
@@ -18,3 +18,6 @@ Contents
 .. toctree::
 
    :maxdepth: 2
+
+   user\index
+   developer\index
