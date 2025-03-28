@@ -19,5 +19,5 @@ Contents
 
    :maxdepth: 2
 
-   user\index
-   developer\index
+   user/index.rst
+   developer/index.rst
